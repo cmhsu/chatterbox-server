@@ -48,7 +48,7 @@ $(function() {
         success: function (data) {
           console.log('chatterbox: Message sent');
           // Trigger a fetch to update the messages, pass true to animate
-          app.fetch(true);
+          app.fetch();
         },
         error: function (data) {
           console.error('chatterbox: Failed to send message');
@@ -73,16 +73,16 @@ $(function() {
           var displayedRoom = $('.chat span').first().data('roomname');
           app.stopSpinner();
           // Only bother updating the DOM if we have a new message
-          //if (mostRecentMessage.objectId !== app.lastMessageId || app.roomname !== displayedRoom) {
-            // Update the UI with the fetched rooms
-            app.populateRooms(data.results);
+          // if (mostRecentMessage.objectId !== app.lastMessageId || app.roomname !== displayedRoom) {
+          // Update the UI with the fetched rooms
+          app.populateRooms(data.results);
 
-            // Update the UI with the fetched messages
-            app.populateMessages(data.results, animate);
+          // Update the UI with the fetched messages
+          app.populateMessages(data.results, animate);
 
-            // Store the ID of the most recent message
-            app.lastMessageId = mostRecentMessage.objectId;
-          //}
+          // Store the ID of the most recent message
+          app.lastMessageId = mostRecentMessage.objectId;
+          // }
         },
         error: function(data) {
           console.error('chatterbox: Failed to fetch messages');
@@ -210,12 +210,10 @@ $(function() {
       }
     },
     handleSubmit: function(evt) {
-      app.lastMessageId++;
       var message = {
         username: app.username,
         message: app.$message.val(),
-        roomname: app.roomname || 'lobby',
-        objectId: app.lastMessageId
+        roomname: app.roomname || 'lobby'
       };
 
       app.send(message);
