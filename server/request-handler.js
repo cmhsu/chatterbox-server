@@ -14,11 +14,12 @@ this file and include it in basic-server.js so that it actually works.
 var fs = require('fs');
 var url = require('url');
 
-var storedMessages = require("./messages.json");
+//var storedMessages = require("./messages.json");
 
 
 var requestHandler = function(request, response) {
   console.log("Serving request type " + request.method + " for url " + request.url);
+  storedMessages = require("./messages.json");
   var pathname = url.parse(request.url).pathname;
 
   var pathnamesplit = pathname.split('/');
@@ -65,6 +66,7 @@ var requestHandler = function(request, response) {
 
 
     }
+
   } else if (pathnamesplit[1] === "classes") {
     var roomname = pathnamesplit[2];
 
