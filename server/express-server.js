@@ -3,7 +3,7 @@ var express = require("express");
 var fs = require('fs');
 var url = require('url');
 var cors = require('cors');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 var storedMessages = require("./messages.json");
 
 
